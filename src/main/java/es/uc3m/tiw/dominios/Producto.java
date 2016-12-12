@@ -1,6 +1,40 @@
 package es.uc3m.tiw.dominios;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import static javax.persistence.GenerationType.AUTO;
+
+import javax.persistence.Column;
+
+@Entity
+@Table(name = "PRODUCTOS")
+@XmlRootElement(name="productos")
 public class Producto {
+	
+	@Id
+	@GeneratedValue(strategy = AUTO)
+	private int id;
+	@Column (length = 25, nullable = false)
+	private String titulo;
+	@Column (length = 25, nullable = false)
+	private String categoria;
+	@Column (length = 500, nullable = false)
+	private String descripcion;
+	@Column (length = 25, nullable = false)
+	private String estado;
+	@Column (length = 25, nullable = false)
+	private String ciudad;
+	@Column (length = 25, nullable = false)
+	private String imagen;
+	@Column (length = 25, nullable = false)
+	private int precio;
+	@Column (length = 25, nullable = false)
+	private int usuario;
+	
 
 	
 	public Producto() {
@@ -20,21 +54,6 @@ public class Producto {
 		this.precio = precio;
 		this.usuario = usuario;
 	}
-	
-	
-	
-	private int id;
-	private String titulo;
-	private String categoria;
-	private String descripcion;
-	private String estado;
-	private String ciudad;
-	private String imagen;
-	private int precio;
-	private int usuario;
-	
-	
-	
 	
 	public int getId() {
 		return id;
