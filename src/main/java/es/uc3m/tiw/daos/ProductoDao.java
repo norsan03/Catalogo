@@ -2,11 +2,24 @@ package es.uc3m.tiw.daos;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
 
-import org.springframework.data.
 import es.uc3m.tiw.dominios.Producto;
 
 public interface ProductoDao extends CrudRepository<Producto, Long> {
+	
+	//El DAO guarda, borra, busca
 
-	List<Producto> findByClienteID(long clienteID);
+	//Buscar todos los productos de la base de datos
+	List<Producto> findAll();
+	
+	//Borrar producto
+	void delete(int id);
+	
+	//Guardar producto
+	void save(int id);
+	
+	
+	
+   
 }

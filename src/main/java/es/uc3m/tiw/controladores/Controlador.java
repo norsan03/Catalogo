@@ -18,13 +18,13 @@ public class Controlador {
 	
 	@RequestMapping(value="/altaProducto", method=RequestMethod.POST)
 	public void altaProducto(@RequestBody Producto producto){
-		pdao.saveAndFlush(producto);
+		pdao.save(producto);
 	}
 		
 
 	@RequestMapping(value="/ModificarProducto", method=RequestMethod.POST)
 	public boolean editarProducto(@RequestBody Producto producto){
-		pdao.saveAndFlush(producto);
+		pdao.save(producto);
 		return true;
 	}
 
