@@ -17,37 +17,49 @@ import es.uc3m.tiw.dominios.*;
 public class Controlador {
 	
 	@Autowired
-	ProductoRepository pdao;
+	ProductoRepository productoDao;
 	
 	@RequestMapping(value="/altaProducto", method=RequestMethod.POST)
 	public void altaProducto(@RequestBody Producto producto){
-		pdao.save(producto);
+		productoDao.save(producto);
 	}
 		
-
-	@RequestMapping(value="/ModificarProducto", method=RequestMethod.PUT)
-	public boolean editarProducto(@RequestBody Producto producto){
-		pdao.save(producto);
+	@RequestMapping(value="/ModificarProducto", method=RequestMethod.PUT) // POST
+	public boolean editarProducto(@RequestBody Producto productoAEditar){
+		
+		/*
+		productoAEditar.setTitulo(productoAEditar.getTitulo());
+		productoAEditar.setCategoria(productoAEditar.getCategoria());
+		productoAEditar.setDescripcion(productoAEditar.getDescripcion());
+		productoAEditar.setEstado(productoAEditar.getEstado());
+		productoAEditar.setCiudad(productoAEditar.getCiudad());
+		productoAEditar.setImagen(productoAEditar.getImagen());
+		productoAEditar.setPrecio(productoAEditar.getPrecio());
+		*/
+		
+		productoDao.save(productoAEditar);
 		return true;
 	}
 
-	@RequestMapping(value="/eliminar", method=RequestMethod.POST)
+	@RequestMapping(value="/eliminarProducto", method=RequestMethod.POST)
 	public boolean eliminarProducto(@RequestBody long id){
-		pdao.delete(id);
+		productoDao.delete(id);
 		return true;
 	}
 	
 	 @RequestMapping(value="/catalogo" , method = RequestMethod.GET)
 	 public @ResponseBody List<Producto> ObtenerProductosCatalogo(){
-		 return pdao.findAll();
-	 }
+		 return productoDao.findAll();
+	}
 	 
 	 @RequestMapping(value="/buscarProductoPorID", method=RequestMethod.POST)
-		public Producto buscarProductoporID(@RequestBody long id){
-			return pdao.findOne(id);
-		}
+	public Producto buscarProductoporID(@RequestBody long id){
+		return productoDao.findOne(id);
+	}
+	 
 	 @RequestMapping(value="/busquedaSimple", method=RequestMethod.POST)
-		public List <Producto> buscarPorTitulooDescripcion(@RequestParam(value ="titulo")String titulo,@RequestParam(value ="descripcion")String descripcion){
-			return pdao.findByTituloOrDescripcion(titulo, descripcion);
-		}
+	public List <Producto> buscarPorTitulooDescripcion(@RequestParam(value ="titulo")String titulo,@RequestParam(value ="descripcion")String descripcion){
+		return productoDao.findByTituloOrDescripcion(titulo, descripcion);
+	}
+	 
 }
