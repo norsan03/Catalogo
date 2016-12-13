@@ -3,6 +3,7 @@ package es.uc3m.tiw.dominios;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -28,8 +29,9 @@ public class Producto {
 	private String estado;
 	@Column (length = 25, nullable = false)
 	private String ciudad;
-	@Column (length = 25, nullable = false)
-	private String imagen;
+	@Lob
+	@Column(nullable=true, columnDefinition="mediumblob")
+	private byte[] imagen;
 	@Column (length = 25, nullable = false)
 	private int precio;
 	@Column (length = 25, nullable = false)
@@ -42,7 +44,7 @@ public class Producto {
 		// TODO Auto-generated constructor stub
 	}
 	public Producto(int id, String titulo, String categoria, String descripcion, String estado, String ciudad,
-			String imagen, int precio, int usuario) {
+			byte[] imagen, int precio, int usuario) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -91,10 +93,10 @@ public class Producto {
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
-	public String getImagen() {
+	public byte[] getImagen() {
 		return imagen;
 	}
-	public void setImagen(String imagen) {
+	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
 	}
 	public int getPrecio() {
