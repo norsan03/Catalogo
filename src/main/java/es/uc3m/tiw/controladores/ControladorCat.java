@@ -3,25 +3,31 @@ package es.uc3m.tiw.controladores;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import es.uc3m.tiw.daos.ProductoRepository;
 import es.uc3m.tiw.dominios.*;
 
+
+@SessionAttributes({"uLogueado"})
 @RestController
 public class ControladorCat {
 	
 	@Autowired
 	ProductoRepository productoDao;
 	
-	@RequestMapping(value="/altaProducto", method = RequestMethod.POST)
+	@RequestMapping(value="/guardarProducto", method = RequestMethod.POST)
 	public @ResponseBody Producto registrarProducto(@RequestBody Producto productoARegistrar){
+	productoARegistrar.setEstado("Disponible");
 	productoDao.save(productoARegistrar);; //guardar, editar, borrar, findbyOne(Primary key) son métodos que vienen implementados ya en el CrudRepository
 	return productoARegistrar;
 	}
@@ -48,6 +54,13 @@ public class ControladorCat {
 	public boolean eliminarProducto(@RequestBody long id){
 		productoDao.delete(id);
 		return true;
+	}
+	
+	@RequestMapping(value="/obtenerMisProductos/{id}", method=RequestMethod.GET)
+	public @ResponseBody List<Producto> obtenerMisProductos(@PathVariable(value = "id") Integer id){
+		
+		List <Producto> misProductos = productoDao.findByUsuario(id);
+		return misProductos;
 	}
 	
 	 @RequestMapping(value="/catalogo" , method = RequestMethod.GET)

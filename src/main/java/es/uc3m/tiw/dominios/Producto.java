@@ -23,7 +23,7 @@ public class Producto {
 	private String titulo;
 	@Column (length = 25, nullable = false)
 	private String categoria;
-	@Column (length = 500, nullable = false)
+	@Column (length = 500)
 	private String descripcion;
 	@Column (length = 25, nullable = false)
 	private String estado;
@@ -34,7 +34,7 @@ public class Producto {
 	private byte[] imagen;*/
 	@Column (length = 25, nullable = false)
 	private int precio;
-	@Column (length = 25, nullable = false)
+	@Column (length = 25)
 	private int usuario;
 	
 
