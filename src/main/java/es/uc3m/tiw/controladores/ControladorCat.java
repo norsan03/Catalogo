@@ -9,20 +9,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.support.SessionStatus;
 
 import es.uc3m.tiw.daos.ProductoRepository;
 import es.uc3m.tiw.dominios.*;
 
 @RestController
-public class Controlador {
+public class ControladorCat {
 	
 	@Autowired
 	ProductoRepository productoDao;
 	
-	@RequestMapping(value="/altaProducto", method=RequestMethod.POST)
-	public void altaProducto(@RequestBody Producto producto){
-		productoDao.save(producto);
+	@RequestMapping(value="/altaProducto", method = RequestMethod.POST)
+	public @ResponseBody Producto registrarProducto(@RequestBody Producto productoARegistrar){
+	productoDao.save(productoARegistrar);; //guardar, editar, borrar, findbyOne(Primary key) son métodos que vienen implementados ya en el CrudRepository
+	return productoARegistrar;
 	}
+	
 		
 	@RequestMapping(value="/ModificarProducto", method=RequestMethod.PUT) // POST
 	public boolean editarProducto(@RequestBody Producto productoAEditar){
@@ -61,5 +64,6 @@ public class Controlador {
 	public List <Producto> buscarPorTitulooDescripcion(@RequestParam(value ="titulo")String titulo,@RequestParam(value ="descripcion")String descripcion){
 		return productoDao.findByTituloOrDescripcion(titulo, descripcion);
 	}
-	 
+	
+	
 }
