@@ -63,6 +63,24 @@ public class ControladorCat {
 		return misProductos;
 	}
 	
+	
+	@RequestMapping(value="/obtenerCatalogo", method=RequestMethod.GET)
+	public @ResponseBody List<Producto> obtenerCatalogo(){
+		
+		List <Producto> catalogo = productoDao.findAll();
+		return catalogo;
+	}
+	
+	@RequestMapping(value="/obtenerProducto/{id}", method=RequestMethod.POST)
+	public @ResponseBody Producto obtenerProducto(@PathVariable(value = "id") Integer id){
+		
+		Producto productoEspecifico = productoDao.findById(id);
+		
+		return productoEspecifico;
+	}
+	
+	
+	
 	 @RequestMapping(value="/catalogo" , method = RequestMethod.GET)
 	 public @ResponseBody List<Producto> ObtenerProductosCatalogo(){
 		 return productoDao.findAll();
