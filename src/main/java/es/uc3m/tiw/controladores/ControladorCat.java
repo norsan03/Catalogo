@@ -92,8 +92,8 @@ public class ControladorCat {
 		return productoDao.findOne(id);
 	}
 	 
-	 /*@RequestMapping(value="/busquedaSimple", method=RequestMethod.POST)
-<<<<<<< HEAD
+	 @RequestMapping(value="/busquedaSimple", method=RequestMethod.POST)
+
 		public List<Producto> findByText(@RequestBody String busquedaIntroducida){
 			String titulo, descripcion, textoUpper;
 			List<Producto> resutadoBusquedaSimple;
@@ -113,16 +113,11 @@ public class ControladorCat {
 			}
 			return resutadoBusquedaSimple;
 		}
-=======
+
 	public List <Producto> buscarPorTitulooDescripcion(@RequestParam(value ="titulo")String titulo,@RequestParam(value ="descripcion")String descripcion){
 		return productoDao.findByTituloOrDescripcion(titulo, descripcion);
 	}
 	 
 	 
->>>>>>> d016c56310964872ebe8e2fdb96acdd87b1cca9e
-	
-
-	 
-	 */
 	
 }
