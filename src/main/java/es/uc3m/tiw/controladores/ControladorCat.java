@@ -95,6 +95,11 @@ public class ControladorCat {
 	public List <Producto> buscarPorTitulooDescripcion(@RequestParam(value ="titulo")String titulo,@RequestParam(value ="descripcion")String descripcion){
 		return productoDao.findByTituloOrDescripcion(titulo, descripcion);
 	}
+	 
+	 
 	
+
+	 
+	 
 	
 }
