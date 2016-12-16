@@ -1,5 +1,6 @@
 package es.uc3m.tiw.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,9 +93,25 @@ public class ControladorCat {
 	}
 	 
 	 @RequestMapping(value="/busquedaSimple", method=RequestMethod.POST)
-	public List <Producto> buscarPorTitulooDescripcion(@RequestParam(value ="titulo")String titulo,@RequestParam(value ="descripcion")String descripcion){
-		return productoDao.findByTituloOrDescripcion(titulo, descripcion);
-	}
+		public List<Producto> findByText(@RequestBody String busquedaIntroducida){
+			String titulo, descripcion, textoUpper;
+			List<Producto> resutadoBusquedaSimple;
+			if(busquedaIntroducida != null) {
+				resutadoBusquedaSimple = new ArrayList<Producto>();
+				textoUpper = busquedaIntroducida.toUpperCase();
+				List<Producto> lista = productoDao.findAll();
+				for(Producto p : lista) {
+					titulo = p.getTitulo().toUpperCase();
+					descripcion = p.getDescripcion().toUpperCase();
+					if (titulo.contains(textoUpper) || descripcion.contains(textoUpper)){
+						resutadoBusquedaSimple.add(p);
+					}
+				}
+			} else {
+				resutadoBusquedaSimple = productoDao.findAll();
+			}
+			return resutadoBusquedaSimple;
+		}
 	
 	
 }
