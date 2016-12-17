@@ -51,10 +51,11 @@ public class ControladorCat {
 		return true;
 	}
 
-	@RequestMapping(value="/eliminarProducto", method=RequestMethod.POST)
-	public boolean eliminarProducto(@RequestBody long id){
-		productoDao.delete(id);
-		return true;
+	@RequestMapping(value="/eliminarProducto/{id}", method=RequestMethod.POST)
+	public @ResponseBody Producto eliminarProducto(@PathVariable(value = "id") Integer id){
+		Producto productoABorrar = productoDao.findById(id);
+		productoDao.delete(productoABorrar);
+		return productoABorrar;
 	}
 	
 	@RequestMapping(value="/obtenerMisProductos/{id}", method=RequestMethod.GET)
@@ -87,10 +88,10 @@ public class ControladorCat {
 		 return productoDao.findAll();
 	}
 	 
-	 @RequestMapping(value="/buscarProductoPorID", method=RequestMethod.POST)
+	/* @RequestMapping(value="/buscarProductoPorID", method=RequestMethod.POST)
 	public Producto buscarProductoporID(@RequestBody long id){
 		return productoDao.findOne(id);
-	}
+	}*/
 	 
 	 @RequestMapping(value="/busquedaSimple", method=RequestMethod.POST)
 
