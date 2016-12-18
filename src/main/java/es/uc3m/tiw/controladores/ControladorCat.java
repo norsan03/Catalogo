@@ -65,6 +65,11 @@ public class ControladorCat {
 		return misProductos;
 	}
 	
+	@RequestMapping(value="/buscarProducto/{id}", method=RequestMethod.GET)
+	public @ResponseBody Producto buscarProductoId(@RequestBody int id){
+		Producto productoId = productoDao.findById(id);
+		return productoId;
+	}
 	
 	@RequestMapping(value="/obtenerCatalogo", method=RequestMethod.GET)
 	public @ResponseBody List<Producto> obtenerCatalogo(){
