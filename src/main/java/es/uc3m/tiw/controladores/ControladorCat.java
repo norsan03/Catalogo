@@ -34,21 +34,12 @@ public class ControladorCat {
 	}
 	
 		
-	@RequestMapping(value="/ModificarProducto", method=RequestMethod.PUT) // POST
-	public boolean editarProducto(@RequestBody Producto productoAEditar){
+	@RequestMapping(value="/ModificarProducto", method=RequestMethod.POST)
+	public @ResponseBody Producto editarProducto(@RequestBody Producto productoAModificar){
 		
-		/*
-		productoAEditar.setTitulo(productoAEditar.getTitulo());
-		productoAEditar.setCategoria(productoAEditar.getCategoria());
-		productoAEditar.setDescripcion(productoAEditar.getDescripcion());
-		productoAEditar.setEstado(productoAEditar.getEstado());
-		productoAEditar.setCiudad(productoAEditar.getCiudad());
-		productoAEditar.setImagen(productoAEditar.getImagen());
-		productoAEditar.setPrecio(productoAEditar.getPrecio());
-		*/
-		
-		productoDao.save(productoAEditar);
-		return true;
+		productoDao.saveAndFlush(productoAModificar);
+		return productoAModificar;
+	
 	}
 
 	@RequestMapping(value="/eliminarProducto/{id}", method=RequestMethod.POST)
